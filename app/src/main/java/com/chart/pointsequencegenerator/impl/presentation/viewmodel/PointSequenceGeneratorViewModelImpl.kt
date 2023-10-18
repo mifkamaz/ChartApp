@@ -29,10 +29,11 @@ class PointSequenceGeneratorViewModelImpl(
                 updateState { copy(loading = true) }
                 val sequence = repository.generatePointSequence(action.count)
                 navigation.openPointSequenceViewer(sequence.id)
+            },
+            finallyBlock = {
                 updateState { copy(loading = false) }
             },
             onError = {
-                updateState { copy(loading = false) }
                 val effect = when (it) {
                     is BusinessError ->
                         PointSequenceGenerator.Effect.BusinessError(
@@ -50,7 +51,7 @@ class PointSequenceGeneratorViewModelImpl(
                 }
                 trySendEffect { effect }
                 Timber.Forest.e(it)
-            }
+            },
         )
     }
 
