@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><!--TODO: Нужно сказать бекендерам переехать на https-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">hr-challenge.interactive-ventures.com</domain>
+    </domain-config>
+</network-security-config>

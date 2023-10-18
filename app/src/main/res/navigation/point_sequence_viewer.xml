@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pointSequenceGenerator2"
+    app:startDestination="@+id/pointSequenceViewer">
+    <fragment
+        android:id="@+id/pointSequenceViewer"
+        android:name="com.chart.pointsequenceviewer.impl.presentation.fragment.PointSequenceViewerFragment">
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <deepLink app:uri="chart://chart.app/view?id={id}" />
+    </fragment>
+</navigation>

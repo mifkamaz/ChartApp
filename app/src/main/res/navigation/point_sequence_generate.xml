@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pointSequenceGeneratorGraph"
+    app:startDestination="@+id/pointSequenceGenerator">
+    <fragment
+        android:id="@+id/pointSequenceGenerator"
+        android:name="com.chart.pointsequencegenerator.impl.presentation.fragment.PointSequenceGeneratorFragment" />
+</navigation>
