@@ -14,20 +14,36 @@ class PointSequenceGeneratorViewModelImpl(
 ) : PointSequenceGeneratorViewModel() {
 
     override fun getInitialState() = PointSequenceGenerator.State(
-        loading = false
+        input = null,
+        loading = false,
+        validInput = false
     )
 
     override fun onAction(action: PointSequenceGenerator.Action) {
         when (action) {
+            is PointSequenceGenerator.Action.InputChanged -> processInputChanged(action)
             is PointSequenceGenerator.Action.Submit -> processSubmit(action)
         }
     }
 
+    private fun processInputChanged(action: PointSequenceGenerator.Action.InputChanged) {
+        val inputDigits = action.input.toIntOrNull()
+        updateState {
+            copy(
+                input = inputDigits,
+                validInput = inputDigits != null && inputDigits > 0,
+            )
+        }
+    }
+
     private fun processSubmit(action: PointSequenceGenerator.Action.Submit) {
+        if (!uiState.value.validInput) return
         launch(
             block = {
                 updateState { copy(loading = true) }
-                val sequence = repository.generatePointSequence(action.count)
+                val sequence = repository.generatePointSequence(
+                    requireNotNull(uiState.value.input)
+                )
                 navigation.openPointSequenceViewer(sequence.id)
             },
             finallyBlock = {
