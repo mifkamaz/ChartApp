@@ -1,6 +1,7 @@
 package com.chart.app
 
 import com.chart.di.DependenciesProvider
+import com.chart.navigation.NavControllerExecutor
 import com.chart.points.api.domain.repository.PointRepository
 import com.chart.points.impl.data.datasource.PointsLocalDataSourceImpl
 import com.chart.points.impl.data.datasource.PointsRemoteDataSource
@@ -27,7 +28,8 @@ object AppScopeDependencies : DependenciesProvider {
             localDataSource = PointsLocalDataSourceImpl(),
             pointsMapper = PointsMapperImpl()
         ),
-        PointSequenceViewerMediator::class.java to PointSequenceViewerMediatorImpl()
+        PointSequenceViewerMediator::class.java to PointSequenceViewerMediatorImpl(),
+        NavControllerExecutor::class.java to NavControllerExecutor()
     )
 
     @Suppress("UNCHECKED_CAST")

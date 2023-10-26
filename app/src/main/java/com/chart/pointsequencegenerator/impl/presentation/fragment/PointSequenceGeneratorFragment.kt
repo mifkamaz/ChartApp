@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.chart.databinding.FragmnentPointSequenceGeneratorBinding
 import com.chart.pointsequencegenerator.impl.presentation.model.mvi.PointSequenceGenerator
 import com.chart.pointsequencegenerator.impl.presentation.viewmodel.PointSequenceGeneratorViewModel
@@ -25,7 +24,7 @@ class PointSequenceGeneratorFragment : Fragment() {
     }
 
     private val viewModel: PointSequenceGeneratorViewModel
-            by viewModels { PointSequenceGeneratorViewModelFactory(findNavController()) }
+            by viewModels { PointSequenceGeneratorViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
