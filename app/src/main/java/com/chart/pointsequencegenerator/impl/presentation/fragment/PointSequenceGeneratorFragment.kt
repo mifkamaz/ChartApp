@@ -77,6 +77,9 @@ class PointSequenceGeneratorFragment : Fragment() {
                 PointSequenceGenerator.Action.InputChanged(it?.toString().orEmpty())
             )
         }
+        toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun renderState(state: PointSequenceGenerator.State) = binding.run {

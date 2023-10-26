@@ -41,8 +41,14 @@ class PointSequenceViewerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.uiState.onEach { renderState(it) }.launchIn(viewLifecycleOwner.lifecycleScope)
+        setupListeners()
+    }
+
+    private fun setupListeners() = binding.run {
+        toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun renderState(state: PointSequenceViewer.State) {
