@@ -63,10 +63,10 @@ dependencies {
     implementation(libs.retrofit.serialization)
     implementation(libs.okhttp)
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
+    implementation(libs.chart.kotlin)
 
     implementation(libs.vico.core)
     implementation(libs.vico.views)

@@ -16,9 +16,12 @@ import com.chart.pointsequenceviewer.impl.presentation.adapter.CustomAdapter
 import com.chart.pointsequenceviewer.impl.presentation.model.mvi.PointSequenceViewer
 import com.chart.pointsequenceviewer.impl.presentation.viewmodel.PointSequenceViewerViewModel
 import com.chart.pointsequenceviewer.impl.presentation.viewmodelfactory.PointSequenceViewerViewModelFactory
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartZoomType
+import com.github.aachartmodel.aainfographics.aachartcreator.AADataElement
+import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import com.patrykandpatrick.vico.core.entry.FloatEntry
-import com.patrykandpatrick.vico.core.entry.entryModelOf
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -47,11 +50,30 @@ class PointSequenceViewerFragment : Fragment() {
         renderTable(state)
     }
 
-    private fun renderChart(state: PointSequenceViewer.State) {
-        val listOf = state.points.map { FloatEntry(it.x, it.y) }
-        binding.chartView.setModel(
-            entryModelOf(listOf)
-        )
+    private fun renderChart(state: PointSequenceViewer.State) = binding.run {
+        val aaChartModel: AAChartModel = AAChartModel()
+            .chartType(AAChartType.Spline)
+            .backgroundColor("#ffffff")
+            .dataLabelsEnabled(true)
+            .legendEnabled(false)
+            .zoomType(AAChartZoomType.XY)
+            .dataLabelsEnabled(false)
+            .xAxisVisible(true)
+            .yAxisVisible(true)
+            .series(
+                arrayOf(
+                    AASeriesElement()
+                        .name("")
+                        .data(
+                            state.points.map {
+                                AADataElement()
+                                    .x(it.x)
+                                    .y(it.y)
+                            }.toTypedArray()
+                        )
+                )
+            )
+        aaChartView.aa_drawChartWithChartModel(aaChartModel)
     }
 
     private fun renderTable(state: PointSequenceViewer.State) {
