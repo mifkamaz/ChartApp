@@ -8,6 +8,8 @@ import com.chart.pointsequencegenerator.impl.presentation.model.mvi.PointSequenc
 import com.chart.pointsequencegenerator.impl.presentation.navigation.PointSequenceGeneratorNavigation
 import timber.log.Timber
 
+// TODO: При такой реализации приложение не сохраняет данные при смерти процесса (потеряется воод пользователя)
+//       Что-бы переживало нужно использовать SavedStateHandle для сохранения ввода
 class PointSequenceGeneratorViewModelImpl(
     private val repository: PointRepository,
     private val navigation: PointSequenceGeneratorNavigation,
